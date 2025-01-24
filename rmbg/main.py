@@ -44,7 +44,7 @@ def handler(event):
             s3_client = boto3.client("s3")
 
         # Download from S3 and get image metadata
-        response = s3_client.get_object(Bucket="hasura-storage", Key=image_key)
+        response = s3_client.get_object(Bucket="your-bucket-name", Key=image_key)
         image_obj = BytesIO(response["Body"].read())
         image = Image.open(image_obj)
         original_info = image.info
@@ -97,7 +97,7 @@ def handler(event):
     transparent_key = f"img/{image_id}/trans.png"
     s3_client.upload_fileobj(
         Fileobj=buffered,
-        Bucket="hasura-storage",
+        Bucket="your-bucket-name",
         Key=transparent_key,
         ExtraArgs={"ContentType": "image/png"},
     )

@@ -41,7 +41,7 @@ def handler(event):
         if s3_client is None:
             s3_client = boto3.client("s3")
 
-        response = s3_client.get_object(Bucket="hasura-storage", Key=image_key)
+        response = s3_client.get_object(Bucket="your-bucket-name", Key=image_key)
         image_obj = BytesIO(response["Body"].read())
 
     except Exception as e:
@@ -81,7 +81,7 @@ def handler(event):
     annotated_key = f"img/{image_id}/segment.png"
     s3_client.upload_fileobj(
         Fileobj=annotated_buffer,
-        Bucket="hasura-storage",
+        Bucket="your-bucket-name",
         Key=annotated_key,
         ExtraArgs={"ContentType": "image/png"},
     )
@@ -115,7 +115,7 @@ def handler(event):
             mask_key = f"img/{image_id}/masks/{label.replace(' ', '_')}_{ci}.png"
             s3_client.upload_fileobj(
                 Fileobj=mask_buffer,
-                Bucket="hasura-storage",
+                Bucket="your-bucket-name",
                 Key=mask_key,
                 ExtraArgs={"ContentType": "image/png"},
             )
@@ -151,7 +151,7 @@ def handler(event):
             segment_key = f"img/{image_id}/segments/{label.replace(' ', '_')}_{ci}.png"
             s3_client.upload_fileobj(
                 Fileobj=buffered,
-                Bucket="hasura-storage",
+                Bucket="your-bucket-name",
                 Key=segment_key,
                 ExtraArgs={"ContentType": "image/png"},
             )

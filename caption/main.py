@@ -53,7 +53,7 @@ def handler(event):
         # Reuse existing S3 client if available
         if s3_client is None:
             s3_client = boto3.client("s3")
-        response = s3_client.get_object(Bucket="hasura-storage", Key=image_key)
+        response = s3_client.get_object(Bucket="your-bucket-name", Key=image_key)
         image_obj = BytesIO(response["Body"].read())
         image = Image.open(image_obj)
     except Exception as e:
@@ -112,7 +112,9 @@ def handler(event):
         # Save the caption to S3
         try:
             caption_key = f"img/{image_id}/caption.txt"
-            s3_client.put_object(Bucket="hasura-storage", Key=caption_key, Body=caption)
+            s3_client.put_object(
+                Bucket="your-bucket-name", Key=caption_key, Body=caption
+            )
         except Exception as e:
             return {"error": f"Failed to process S3 operation: {str(e)}"}
 

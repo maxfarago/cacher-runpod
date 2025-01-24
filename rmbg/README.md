@@ -1,4 +1,4 @@
-# Hasura Background Removal Service
+# Background Removal Service
 
 A serverless GPU-powered background removal service built with RunPod, PyTorch, and the [RMBG-2.0 model](https://huggingface.co/briaai/RMBG-2.0) (developed on [BiRefNet architecture](https://github.com/ZhengPeng7/BiRefNet)).
 
